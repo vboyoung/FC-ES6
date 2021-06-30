@@ -96,15 +96,50 @@ function solveB() {
   return result
 }
 
+/**
+ * ["서울", "cat"],
+ * ["서울", "dog"],
+ * ["부산", "dog"],
+ */
+
 function solveBModern() {
-  return people.map(({ pet: petOrPets, city }) => {
-    //pet의 형식을 배열로 모두 변경한다.
-    const pets = typeof petOrPets === 'string' ? [petOrPets] : petOrPets || []
-    return {
-      city,
-      pets,
-    }
-  })
+  return (
+    people
+      .map(({ pet: petOrPets, city }) => {
+        //pet의 형식을 배열로 모두 변경한다.
+        //undifind가 생기면  빈 array로 변경해준다. ( [] )
+        const pets =
+          (typeof petOrPets === 'string' ? [petOrPets] : petOrPets) || []
+        return {
+          city,
+          pets,
+        }
+      })
+      /**
+       * [
+       *   [
+       *    ["서울", "cat"],
+       *    ["서울", "dog"],
+       *   ],
+       *   [
+       *    ["부산", "dog"],
+       *   ]
+       * ]
+       */
+      .flatMap(({ city, pets }) => pets.map((pet) => [city, pet]))
+      .reduce((/** @type {petsOfCities} */ result, [city, pet]) => {
+        if (!city || !pet) {
+          return result
+        }
+        return {
+          ...result,
+          [city]: {
+            ...result[city],
+            [pet]: (result[city]?.[pet] || 0) + 1,
+          },
+        }
+      }, {})
+  )
 }
 
 console.log('solveB', solveB())
