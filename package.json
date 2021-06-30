@@ -1,13 +1,18 @@
 {
   "scripts": {
+    "server": "nodemon src/restfulapi.js",
     "debug": "node src/main.js"
   },
   "devDependencies": {
-    "eslint": "^7.29.0",
+    "@types/node": "^15.0.0",
+    "eslint": "^7.25.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
-    "prettier": "^2.3.2"
+    "nodemon": "^2.0.8",
+    "prettier": "^2.2.1",
+    "supertest": "^6.1.3",
+    "typescript": "^4.2.4"
   }
 }
